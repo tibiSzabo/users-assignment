@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { User } from '../models/user.model';
-import { ServiceResponse } from '../models/service-response.model';
 
 describe('UserService', () => {
 
@@ -85,12 +84,33 @@ describe('UserService', () => {
         const req = httpTestingController.expectOne(
             'https://jsonplaceholder.typicode.com/users'
         );
-
-        const spy = spyOnProperty(service, 'users', 'get').and.returnValue(mockUserResponse);
+        req.flush(mockUserResponse);
 
         expect(service.addUser(userToBeAdded).msg).toBe('User with id: 1 already exists!');
 
+    });
+
+    it('should remove user', () => {
+
+        const req = httpTestingController.expectOne(
+            'https://jsonplaceholder.typicode.com/users'
+        );
         req.flush(mockUserResponse);
+
+        expect(service.removeUser(1).success).toBe(true);
+        expect(service.users.length).toBe(1);
+
+    });
+
+    it('should not remove user without existing id', () => {
+
+        const req = httpTestingController.expectOne(
+            'https://jsonplaceholder.typicode.com/users'
+        );
+        req.flush(mockUserResponse);
+
+        expect(service.removeUser(999).msg).toBe('Something went wrong!');
+
     });
 
 });

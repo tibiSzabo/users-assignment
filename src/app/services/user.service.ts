@@ -35,7 +35,7 @@ export class UserService {
 
     public addUser(user: User): ServiceResponse  {
         if (!user || !user.id) {
-            return new ServiceResponse(false, 'Something went wrong!')
+            return new ServiceResponse(false, 'Something went wrong!');
         } else if (this.userWithIdExists(user.id)) {
             return new ServiceResponse(false, 'User with id: ' + user.id + ' already exists!');
         }
@@ -44,7 +44,12 @@ export class UserService {
     }
 
     public removeUser(id: number): ServiceResponse  {
-        return null;
+        if (!id || !this.userWithIdExists(id)) {
+            return new ServiceResponse(false, 'Something went wrong!');
+        }
+        this.users = this.users.filter(user => user.id !== id);
+        this.usersChanged.next(this.users);
+        return new ServiceResponse(true, '');
     }
 
     public updateUser(user: User): ServiceResponse  {
