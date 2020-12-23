@@ -22,7 +22,6 @@ export class UserService {
             if (response && response.length > 0) {
                 response.forEach(user => this.users.push(new User().deserialize(user)));
                 this.usersChanged.next(this.users);
-                // console.log(this.users);
             }
         });
     }
