@@ -38,10 +38,6 @@ describe('UserService', () => {
         httpTestingController.verify();
     });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-
     it('should get correct answer from mocked API', () => {
         service.usersChanged.subscribe(users => {
             expect(users.length).toBe(2);
