@@ -1,0 +1,38 @@
+.table-container
+    padding: 1rem 2rem
+    font-size: 1rem
+    width: 100%
+
+table
+    text-align: left
+    position: relative
+    border-collapse: collapse
+    width: 100%
+
+th, td
+    padding: 1rem 0.5rem
+
+th
+    background: white
+    position: sticky
+    top: 0
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4)
+    z-index: 1
+    
+tr:nth-child(even)
+    background-color: #0000000f
+    
+.svg-icon
+    cursor: pointer
+    
+
+@media screen and (max-width: 600px)
+    .table-container
+        font-size: 1rem
+        padding: 0
+        width: 100%
+        display: block
+    td svg
+        transform: scale(1)
+        margin-left: 2rem
+        z-index: 0
